@@ -1,81 +1,105 @@
-local is_vscode = vim.g.vscode ~= nil
-if is_vscode then
-  return
-end
+local keybinds = require("g/keybinds")
 
-local lsp_defaults = {
-  flags = {
-    debounce_text_changes = 150,
-  },
-  capabilities = require('cmp_nvim_lsp').update_capabilities(
-    vim.lsp.protocol.make_client_capabilities()
-  ),
-  on_attach = function(client, bufnr)
-    vim.api.nvim_exec_autocmds('User', {pattern = 'LspAttached'})
-  end
-}
+-- Mason should be required before lspconfig:
+require("mason").setup()
+require("mason-lspconfig").setup()
 
-local lspconfig = require('lspconfig')
+local lspconfig = require("lspconfig")
+local lsp_defaults = lspconfig.util.default_config
 
-lspconfig.util.default_config = vim.tbl_deep_extend(
-  'force',
-  lspconfig.util.default_config,
-  lsp_defaults
-)
+-- -------------------------------
+-- START LSP Servers:
+-- -------------------------------
 
-require'lspconfig'.clangd.setup{}
+-- Lua:
+lspconfig.sumneko_lua.setup({
+	single_file_support = true,
+})
 
--- Mappings.
--- See `:help vim.diagnostic.*` for documentation on any of the below functions
-local opts = { noremap=true, silent=true }
-vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
-vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
+lspconfig.rust_analyzer.setup({})
 
--- Use an on_attach function to only map the following keys
--- after the language server attaches to the current buffer
-local on_attach = function(client, bufnr)
-  -- Enable completion triggered by <c-x><c-o>
-  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+lspconfig.clangd.setup({})
 
-  -- Mappings.
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
-  local bufopts = { noremap=true, silent=true, buffer=bufnr }
-  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-  vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
-  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-  vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
-  vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
-  vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
-  vim.keymap.set('n', '<space>wl', function()
-    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  end, bufopts)
-  vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
-  vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
-  vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
-  vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-  vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
-end
+lspconfig.gopls.setup({
+	analyses = {
+		unusedparams = true,
+	},
+	staticcheck = true,
+})
 
-local lsp_flags = {
-  -- This is the default in Nvim 0.7+
-  debounce_text_changes = 150,
-}
-require('lspconfig')['pyright'].setup{
-    on_attach = on_attach,
-    flags = lsp_flags,
-}
-require('lspconfig')['tsserver'].setup{
-    on_attach = on_attach,
-    flags = lsp_flags,
-}
-require('lspconfig')['rust_analyzer'].setup{
-    on_attach = on_attach,
-    flags = lsp_flags,
-    -- Server-specific settings...
-    settings = {
-      ["rust-analyzer"] = {}
-    }
-}
+-- -------------------------------
+-- END LSP Servers ^^
+-- -------------------------------
+
+-- Merge sane defaults into capabilities config:
+lsp_defaults.capabilities =
+	vim.tbl_deep_extend("force", lsp_defaults.capabilities, require("cmp_nvim_lsp").default_capabilities())
+
+-- Configure what happens when an LSP attaches to a buffer:
+vim.api.nvim_create_autocmd("LspAttach", {
+	desc = "LSP actions",
+	callback = function()
+		local bufmap = function(mode, lhs, rhs)
+			local opts = { buffer = true }
+			vim.keymap.set(mode, lhs, rhs, opts)
+		end
+
+		keybinds.apply_lspattach(bufmap)
+	end,
+})
+
+-- Autocompletion:
+require("luasnip.loaders.from_vscode").lazy_load()
+local luasnip = require("luasnip")
+local cmp = require("cmp")
+cmp.setup({
+	snippet = {
+		expand = function(args)
+			luasnip.lsp_expand(args.body)
+		end,
+	},
+
+	sources = {
+		{ name = "path" },
+		{ name = "nvim_lsp_signature_help" },
+		{ name = "nvim_lsp", keyword_length = 3 },
+		{ name = "buffer", keyword_length = 4 },
+		-- {name = 'luasnip', keyword_length = 2},
+	},
+
+	window = {
+		documentation = cmp.config.window.bordered(),
+	},
+
+	formatting = {
+		fields = { "menu", "abbr", "kind" },
+		format = function(entry, item)
+			local menu_icon = {
+				nvim_lsp = "L",
+				luasnip = "S",
+				buffer = "B",
+				path = "~",
+			}
+			item.menu = menu_icon[entry.source.name]
+			return item
+		end,
+	},
+
+	completion = {
+		autocomplete = false,
+	},
+
+	mapping = keybinds.cmp,
+})
+
+-- Other config:
+vim.diagnostic.config({
+	virtual_text = false,
+	severity_sort = true,
+	float = {
+		border = "rounded",
+		source = "always",
+		header = "",
+		prefix = "",
+	},
+})

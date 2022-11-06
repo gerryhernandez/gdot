@@ -38,7 +38,7 @@
 	<false/>
 	<key>GlobalKeyMap</key>
 	<dict>
-		<key>0x6a-0x180000-0x26</key>
+		<key>0x6a-0x100000-0x26</key>
 		<dict>
 			<key>Action</key>
 			<integer>0</integer>
@@ -47,9 +47,9 @@
 			<key>Text</key>
 			<string></string>
 			<key>Version</key>
-			<integer>0</integer>
+			<integer>1</integer>
 		</dict>
-		<key>0x6b-0x180000-0x28</key>
+		<key>0x6b-0x100000-0x28</key>
 		<dict>
 			<key>Action</key>
 			<integer>2</integer>
@@ -58,7 +58,7 @@
 			<key>Text</key>
 			<string></string>
 			<key>Version</key>
-			<integer>0</integer>
+			<integer>1</integer>
 		</dict>
 	</dict>
 	<key>HapticFeedbackForEsc</key>
@@ -70,9 +70,11 @@
 	<key>HideTab</key>
 	<true/>
 	<key>HideTabNumber</key>
-	<true/>
+	<false/>
 	<key>HotkeyMigratedFromSingleToMulti</key>
 	<true/>
+	<key>LeftCommand</key>
+	<integer>1</integer>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -292,6 +294,8 @@
 				<key>Red Component</key>
 				<real>1</real>
 			</dict>
+			<key>Cursor Type</key>
+			<integer>1</integer>
 			<key>Custom Command</key>
 			<string>No</string>
 			<key>Custom Directory</key>
@@ -1412,7 +1416,7 @@
 	<key>SplitPaneDimmingAmount</key>
 	<real>0.15026593995325771</real>
 	<key>SwitchTabModifier</key>
-	<integer>9</integer>
+	<integer>4</integer>
 	<key>SwitchWindowModifier</key>
 	<integer>9</integer>
 	<key>TabStyleWithAutomaticOption</key>

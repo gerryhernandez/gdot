@@ -1,46 +1,64 @@
-vim.opt.nu = true             -- Show line number on current line
-vim.opt.relativenumber = true -- Show relative line numbers
+-- NvimTree (needs to be early in config):
+vim.g.loaded = 1
+vim.g.loaded_netrwPlugin = 1
+require("nvim-tree").setup({
+	sort_by = "case_sensitive",
+	view = {
+		adaptive_size = true,
+		mappings = {
+			list = {
+				{ key = "u", action = "dir_up" },
+			},
+		},
+	},
+	renderer = {
+		group_empty = true,
+	},
+	filters = {
+		dotfiles = true,
+	},
+})
 
-vim.opt.tabstop = 2
-vim.opt.softtabstop = 2
-vim.opt.shiftwidth = 2
-vim.opt.expandtab = true
-vim.opt.smartindent = true
+-- Disable netrw to avoid conflict with nvim-tree:
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 
-vim.opt.scrolloff = 20
-vim.opt.colorcolumn = "80"    -- Column border
+local set = vim.opt
 
-vim.cmd[[
-" Basic Vim settings (haven't yet ported to lua):
+set.nu = true -- Show line number on current line
+set.relativenumber = true -- Show relative line numbers
 
-set timeoutlen=500          " Set timeout length to 500 ms
-set nocompatible            " disable compatibility to old-time vi
-set showmatch               " show matching braces
-set ignorecase              " case insensitive 
-set hlsearch                " highlight search 
-set incsearch               " incremental search
-set mouse=a                 " enable mouse click
-set cursorline              " highlight current cursorline
-set ttyfast                 " Speed up scrolling in Vim
-filetype plugin on
-filetype plugin indent on   " allow auto-indenting depending on file type
-syntax on                   " syntax highlighting
-set splitbelow splitright   " default split location
+set.tabstop = 2
+set.softtabstop = 2
+set.shiftwidth = 2
+set.expandtab = true
+set.smartindent = true
+set.smarttab = true -- <tab>/<BS> indent/dedent in leading whitespace
+set.autoindent = true -- maintain indent of current line
 
-" Support for true color:
-if $TERM !=? 'xterm-256color'
-  set termguicolors
-endif
+set.scrolloff = 20
+set.colorcolumn = "80" -- Column border
+set.sidescrolloff = 4
 
-" Italics
-let &t_ZH="\e[3m"
-let &t_ZR="\e[23m"
+set.undofile = true
+set.undodir = vim.fn.stdpath("config") .. "/undo"
+set.showmatch = true -- show the matching part of the pair for [] {} and ()
+set.cursorline = true -- highlight current line
+set.incsearch = true -- incremental search
+set.hlsearch = true -- highlighted search results
+set.ignorecase = true -- ignore case sensetive while searching
+set.smartcase = true
+set.mouse = "a" -- turn on mouse interaction
+set.updatetime = 500 -- CursorHold interval
+set.shiftround = true
+set.splitbelow = true -- open horizontal splits below current window
+set.splitright = true -- open vertical splits to the right of the current window
 
-" Have a transparent background:
-" augroup user_colors
-"   autocmd!
-"   autocmd ColorScheme * highlight Normal ctermbg=NONE guibg=NONE
-" augroup END
-]]
+set.hidden = true -- allows you to hide buffers with unsaved changes without being prompted
+set.inccommand = "split" -- live preview of :s results
 
-
+-- Initialize customized color schemes so when we switch to them, they're the
+-- way I like them:
+require("g/colors/dracula")
+require("g/colors/material")
+vim.cmd([[colorscheme tokyonight-night]])

@@ -4,12 +4,12 @@ shot.
 
 ## TLDR:
 ```
-curl github.com/gerryhernandez/gdot/.gscripts/unix/init_repo.sh | /bin/bash
+curl https://raw.githubusercontent.com/gerryhernandez/gdot/main/.gscripts/unix/init_repo.sh | /bin/bash
 ```
 
 This will copy all existing dotfiles that would otherwise be overwritten into
 `~/.gdot-backup/`, then copy all dotfiles from the repo into place. This is
-done via the magic of abusing Git's ability to have a repo in anothey
+done via the magic of abusing Git's ability to have a repo in another
 directory. Pretty nifty.
 
 Then just use the `gdot` command as if it's Git. It really is just an aliased
