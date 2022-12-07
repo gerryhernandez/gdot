@@ -1,0 +1,108 @@
+#| --------------------------------------------------------------------------
+
+                         KMonad: ISO ThinkPad T520 Template
+
+   This file contains US and DE `defsrc' configurations for a ThinkPad X220
+   with an ISO keyboard.  Copy out the `defsrc' layer to start your own
+   keyboard configuration.  Copy out the `deflayer' template to easily start
+   a new layer with matching `transparent' buttons.
+
+(deflayer name
+  _    _    _    _                             _    _    _    _    _    _    _
+       _    _    _    _    _    _    _    _    _    _    _    _         _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _         _
+  _    _    _    _    _    _    _    _    _    _    _    _    _         _
+  _    _    _    _    _    _    _    _    _    _    _    _              _
+  _         _    _    _    _    _    _    _    _    _    _              _
+  _    _    _    _              _              _    _    _         _    _    _
+                                                                   _    _    _
+)
+
+  -------------------------------------------------------------------------- |#
+
+(defcfg
+  ;; For Linux
+  input  (device-file "/dev/input/by-path/platform-i8042-serio-0-event-kbd")
+  output (uinput-sink "T520 Kmonad")
+
+  ;; Set this to false to disable any command-execution in KMonad
+  allow-cmd true
+)
+
+;; US
+(defsrc
+  esc  mute vold volu                          prnt slck pause ins del  home pgup
+       f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11   f12      end  pgdn
+  grv  1    2    3    4    5    6    7    8    9    0    -     =        bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [     ]        \
+  caps a    s    d    f    g    h    j    k    l    ;    '              ret
+  lsft    z    x    c    v    b    n    m    ,    .    /                rsft
+  wkup lctl lmet lalt           spc            ralt cmps rctl      back up   fwd
+                                                                   left down rght
+)
+
+(defalias
+  za  (tap-hold-next-release 175 z lalt)
+  /a  (tap-hold-next-release 175 / ralt)
+  lsh (tap-hold-next-release 175 home lsft)
+  rsh (tap-hold-next-release 175 end rsft)
+  cspc (tap-hold-next-release 150 spc lctl)
+
+  as  (tap-hold-next-release 175 a lshift)
+  sa  (tap-hold-next-release 175 s lalt)
+  dm  (tap-hold-next-release 175 d lmet)
+  fc  (tap-hold-next-release 175 f lctl)
+  jc  (tap-hold-next-release 175 j rctl)
+  km  (tap-hold-next-release 175 k rmet)
+  la  (tap-hold-next-release 175 l ralt)
+  ;s  (tap-hold-next-release 175 ; rshift)
+
+  esc (tap-hold-next-release 150 esc (layer-toggle nav))
+
+  1 (around lsft 1)
+  2 (around lsft 2)
+  3 (around lsft 3)
+  4 (around lsft 4)
+  5 (around lsft 5)
+  6 (around lsft 6)
+  7 (around lsft 7)
+  8 (around lsft 8)
+  9 (around lsft 9)
+  0 (around lsft 0)
+)
+
+#| --------------------------------------------------------------------------
+(deflayer main
+  caps mute vold volu                          prnt slck pause ins del  home pgup
+       f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11   f12      end  pgdn
+  grv  1    2    3    4    5    6    7    8    9    0    -     =        bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [     ]        \
+  @esc @as  @sa  @dm  @fc  g    h    @jc  @km  @la  @;s  '              ret
+  lsft    z    x    c    v    b    n    m    ,    .    /                rsft
+  wkup lctl lmet lalt          @cspc           ralt rmet rctl      back up   fwd
+                                                                   left down rght
+)
+  -------------------------------------------------------------------------- |#
+
+(deflayer main
+  caps mute vold volu                          prnt slck pause ins del  home pgup
+       f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11   f12      end  pgdn
+  grv  1    2    3    4    5    6    7    8    9    0    -     =        bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [     ]        \
+  @esc a    s    d    f    g    h    j    k    l    ;    '              ret
+  lsft    z    x    c    v    b    n    m    ,    .    /                rsft
+  wkup lctl lmet lalt           spc            ralt rmet rctl      back up   fwd
+                                                                   left down rght
+)
+
+(deflayer nav
+  _    _    _    _                             _    _    _    _    _    _    _
+       _    _    _    _    _    _    _    _    _    _    _    _         _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _         _
+  _    _    _    _    _    _    _    _    _    _    _    _    _         _
+  _    _    _    _    _    _    left down up   rght bspc _              _
+  _       _    _    _    _    _   home pgdn pgup end  _                 _
+  _    _    _    _              _              _    _    _         _    _    _
+                                                                   _    _    _
+)
+
