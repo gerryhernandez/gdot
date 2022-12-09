@@ -848,6 +848,7 @@ key_bindings:
   - { key: NumpadAdd,      mods: Control,                         action: IncreaseFontSize }
   - { key: Minus,          mods: Control,                         action: DecreaseFontSize }
   - { key: NumpadSubtract, mods: Control,                         action: DecreaseFontSize }
+  - { key: I,              mods: Control,                         chars: "\x1b[105;5u"     }
 
   # (Windows only)
   #- { key: Return,   mods: Alt,           action: ToggleFullscreen }

@@ -70,6 +70,10 @@ nnoremap("<S-Tab>", ",")
 vnoremap("<Tab>", ";")
 vnoremap("<S-Tab>", ",")
 
+-- Binding <Tab> breaks the binding for <C-I>, which navigates forwards
+-- in the jump list. So I'm moving that bind to <C-L>, right under the O.
+nnoremap("<C-L>", "<C-I>")
+
 -- Toggle inline diagnostics
 local inline_diagnostics_enabled = true
 local function toggle_inline_diagnostics()
@@ -150,6 +154,7 @@ local dap = require("dap")
 local dapui = require("dapui")
 nnoremap("<leader>db", dap.toggle_breakpoint, { desc = "toggle Breakpoint" })
 nnoremap("<leader>dc", dap.continue, { desc = "Continue" })
+nnoremap("<leader>dt", require("dap-go").debug_test, { desc = "debug Test" })
 nnoremap("<leader>dC", dap.run_last, { desc = "run most recent debug config" })
 nnoremap("<leader>ds", dap.step_over, { desc = "Step over" })
 nnoremap("<leader>di", dap.step_into, { desc = "step Into" })
