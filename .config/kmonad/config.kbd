@@ -13,7 +13,7 @@
   _    _    _    _    _    _    _    _    _    _    _    _    _         _
   _    _    _    _    _    _    _    _    _    _    _    _    _         _
   _    _    _    _    _    _    _    _    _    _    _    _              _
-  _         _    _    _    _    _    _    _    _    _    _              _
+  _       _    _    _    _    _    _    _    _    _    _              _
   _    _    _    _              _              _    _    _         _    _    _
                                                                    _    _    _
 )
@@ -46,7 +46,7 @@
   /a  (tap-hold-next-release 175 / ralt)
   lsh (tap-hold-next-release 175 home lsft)
   rsh (tap-hold-next-release 175 end rsft)
-  cspc (tap-hold-next-release 150 spc lctl)
+  cspc (tap-hold-next-release 200 spc lctl)
 
   as  (tap-hold-next-release 175 a lshift)
   sa  (tap-hold-next-release 175 s lalt)
@@ -58,6 +58,7 @@
   ;s  (tap-hold-next-release 175 ; rshift)
 
   esc (tap-hold-next-release 150 esc (layer-toggle nav))
+  l' (tap-hold-next-release 150 , (layer-toggle brackets))
 
   1 (around lsft 1)
   2 (around lsft 2)
@@ -69,6 +70,13 @@
   8 (around lsft 8)
   9 (around lsft 9)
   0 (around lsft 0)
+  [ (around lsft [)
+  ] (around lsft ])
+  , (around lsft ,)
+  . (around lsft .)
+  \ (around lsft \ )
+  grv (around lsft grv)
+  - (around lsft -)
 )
 
 #| --------------------------------------------------------------------------
@@ -87,11 +95,11 @@
 (deflayer main
   caps mute vold volu                          prnt slck pause ins del  home pgup
        f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11   f12      end  pgdn
-  grv  1    2    3    4    5    6    7    8    9    0    -     =        bspc
-  tab  q    w    e    r    t    y    u    i    o    p    [     ]        \
-  @esc a    s    d    f    g    h    j    k    l    ;    '              ret
+  grv  1    2    3    4    5    6    7    8    9    0    -     [        bspc
+  tab  q    w    e    r    t    y    u    i    o    p    =     ]        \
+  @esc a    s    d    f    g    h    j    k    l    ;    @l'            ret
   lsft    z    x    c    v    b    n    m    ,    .    /                rsft
-  wkup lctl lmet lalt           spc            ralt rmet rctl      back up   fwd
+  wkup lctl lmet lalt         @cspc            ralt rmet rctl      back up   fwd
                                                                    left down rght
 )
 
@@ -100,9 +108,19 @@
        _    _    _    _    _    _    _    _    _    _    _    _         _    _
   _    _    _    _    _    _    _    _    _    _    _    _    _         _
   _    _    _    _    _    _    _    _    _    _    _    _    _         _
-  _    _    _    _    _    _    left down up   rght bspc _              _
+  _    _    _    _    _    _    left down up   rght bspc del            _
   _       _    _    _    _    _   home pgdn pgup end  _                 _
-  _    _    _    _              _              _    _    _         _    _    _
+  _    _    _    _              @-             _    _    _         _    _    _
                                                                    _    _    _
 )
 
+(deflayer brackets
+  _    _    _    _                             _    _    _    _    _    _    _
+       _    _    _    _    _    _    _    _    _    _    _    _         _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _         _
+  _    _    \    [    ]    @\   _    _    _    _    _    _    _         _
+  _    -    @[   @9   @0   @]   _    _    _    _    _    _              _
+  _       _    _    @,   @.   _    _    _    _    _    _                _
+  _    _    _    _              @-             _    _    _         _    _    _
+                                                                   _    _    _
+)
