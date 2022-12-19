@@ -59,12 +59,12 @@
   la  (tap-hold-next-release 175 l ralt)
   ;s  (tap-hold-next-release 175 ; rshift)
 
-  tab (tap-hold-next-release 150 tab (layer-toggle nav))
+  tab (tap-hold-next-release 150 tab (layer-toggle oops))
   esc (tap-hold-next-release 150 esc (layer-toggle num))
   l' (tap-hold-next-release 150 ' (layer-toggle brackets))
 
-  sym (tap-hold-next-release 150 home (around lsft (layer-toggle num)))
-  eff (tap-hold-next-release 150 end (around lsft (layer-toggle eff)))
+  sym (tap-hold-next-release 150 home (layer-toggle sym))
+  eff (tap-hold-next-release 150 end (layer-toggle eff))
 
   1 (around lsft 1)
   2 (around lsft 2)
@@ -102,7 +102,7 @@
 (deflayer main
   caps mute vold volu                          prnt slck pause ins del  home pgup
        f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11   f12      end  pgdn
-  grv  1    2    3    4    5    6    7    8    9    0    =     [        bspc
+  _    _    _    _    _    _    _    _    _    _    _    _     _        bspc
   @tab q    w    e    r    t    y    u    i    o    p    -     ]        \
   @esc @as  s    d    f    g    h    j    k    l    @;s  @l'            ret
   @sym   z    x    c    v    b    n    m    ,    .    /                 @eff
@@ -110,7 +110,7 @@
                                                                    left down rght
 )
 
-(deflayer nav
+(deflayer oops
   _    _    _    _                             _    _    _    _    _    _    _
        _    _    _    _    _    _    _    _    _    _    _    _         _    _
   _    _    _    _    _    _    _    _    _    _    _    _    _         _
