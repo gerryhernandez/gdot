@@ -13,7 +13,7 @@
   _    _    _    _    _    _    _    _    _    _    _    _    _         _
   _    _    _    _    _    _    _    _    _    _    _    _    _         _
   _    _    _    _    _    _    _    _    _    _    _    _              _
-  _       _    _    _    _    _    _    _    _    _    _              _
+  _      _    _    _    _    _    _    _    _    _    _                 _
   _    _    _    _              _              _    _    _         _    _    _
                                                                    _    _    _
 )
@@ -36,7 +36,7 @@
   grv  1    2    3    4    5    6    7    8    9    0    -     =        bspc
   tab  q    w    e    r    t    y    u    i    o    p    [     ]        \
   caps a    s    d    f    g    h    j    k    l    ;    '              ret
-  lsft    z    x    c    v    b    n    m    ,    .    /                rsft
+  lsft   z    x    c    v    b    n    m    ,    .    /                 rsft
   wkup lctl lmet lalt           spc            ralt cmps rctl      back up   fwd
                                                                    left down rght
 )
@@ -47,6 +47,8 @@
   lsh (tap-hold-next-release 175 home lsft)
   rsh (tap-hold-next-release 175 end rsft)
   cspc (tap-hold-next-release 200 spc lctl)
+  lmt (tap-hold-next-release 200 pgup lmet)
+  rmt (tap-hold-next-release 200 pgdn rmet)
 
   as  (tap-hold-next-release 175 a lshift)
   sa  (tap-hold-next-release 175 s lalt)
@@ -57,8 +59,12 @@
   la  (tap-hold-next-release 175 l ralt)
   ;s  (tap-hold-next-release 175 ; rshift)
 
-  esc (tap-hold-next-release 150 esc (layer-toggle nav))
-  l' (tap-hold-next-release 150 , (layer-toggle brackets))
+  tab (tap-hold-next-release 150 tab (layer-toggle nav))
+  esc (tap-hold-next-release 150 esc (layer-toggle num))
+  l' (tap-hold-next-release 150 ' (layer-toggle brackets))
+
+  sym (tap-hold-next-release 150 home (around lsft (layer-toggle num)))
+  eff (tap-hold-next-release 150 end (around lsft (layer-toggle eff)))
 
   1 (around lsft 1)
   2 (around lsft 2)
@@ -77,6 +83,7 @@
   \ (around lsft \ )
   grv (around lsft grv)
   - (around lsft -)
+  = (around lsft =)
 )
 
 #| --------------------------------------------------------------------------
@@ -84,9 +91,9 @@
   caps mute vold volu                          prnt slck pause ins del  home pgup
        f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11   f12      end  pgdn
   grv  1    2    3    4    5    6    7    8    9    0    -     =        bspc
-  tab  q    w    e    r    t    y    u    i    o    p    [     ]        \
+  @tab q    w    e    r    t    y    u    i    o    p    [     ]        \
   @esc @as  @sa  @dm  @fc  g    h    @jc  @km  @la  @;s  '              ret
-  lsft    z    x    c    v    b    n    m    ,    .    /                rsft
+  lsft   z    x    c    v    b    n    m    ,    .    /                 rsft
   wkup lctl lmet lalt          @cspc           ralt rmet rctl      back up   fwd
                                                                    left down rght
 )
@@ -95,11 +102,11 @@
 (deflayer main
   caps mute vold volu                          prnt slck pause ins del  home pgup
        f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11   f12      end  pgdn
-  grv  1    2    3    4    5    6    7    8    9    0    -     [        bspc
-  tab  q    w    e    r    t    y    u    i    o    p    =     ]        \
-  @esc a    s    d    f    g    h    j    k    l    ;    @l'            ret
-  lsft    z    x    c    v    b    n    m    ,    .    /                rsft
-  wkup lctl lmet lalt         @cspc            ralt rmet rctl      back up   fwd
+  grv  1    2    3    4    5    6    7    8    9    0    =     [        bspc
+  @tab q    w    e    r    t    y    u    i    o    p    -     ]        \
+  @esc @as  s    d    f    g    h    j    k    l    @;s  @l'            ret
+  @sym   z    x    c    v    b    n    m    ,    .    /                 @eff
+  wkup lctl lalt @lmt         @cspc            @rmt ralt rctl      back up   fwd
                                                                    left down rght
 )
 
@@ -109,8 +116,8 @@
   _    _    _    _    _    _    _    _    _    _    _    _    _         _
   _    _    _    _    _    _    _    _    _    _    _    _    _         _
   _    _    _    _    _    _    left down up   rght bspc del            _
-  _       _    _    _    _    _   home pgdn pgup end  _                 _
-  _    _    _    _              @-             _    _    _         _    _    _
+  _      _    _    _    _    _   _     _    _    _    _                 _
+  _    _    _    _              _              _    _    _         _    _    _
                                                                    _    _    _
 )
 
@@ -118,9 +125,43 @@
   _    _    _    _                             _    _    _    _    _    _    _
        _    _    _    _    _    _    _    _    _    _    _    _         _    _
   _    _    _    _    _    _    _    _    _    _    _    _    _         _
-  _    _    \    [    ]    @\   _    _    _    _    _    _    _         _
+  _    _    _    [    ]    _    _    _    _    _    _    _    _         _
   _    -    @[   @9   @0   @]   _    _    _    _    _    _              _
-  _       _    _    @,   @.   _    _    _    _    _    _                _
-  _    _    _    _              @-             _    _    _         _    _    _
+  _      _    _    @,   @.   _    _    _    _    _    _                 _
+  _    _    _    _              _              _    _    _         _    _    _
                                                                    _    _    _
 )
+
+(deflayer num
+  _    _    _    _                             _    _    _    _    _    _    _
+       _    _    _    _    _    _    _    _    _    _    _    _         _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _         _
+  _    _    _    _    _    _    _    4    5    6    _    _    _         _
+  _    _    _    _    _    _    _    1    2    3    0    _              _
+  _      _    _    _    _    _    _    7    8    9    _                 _
+  _    _    _    _              _              _    _    _         _    _    _
+                                                                   _    _    _
+)
+
+(deflayer sym
+  _    _    _    _                             _    _    _    _    _    _    _
+       _    _    _    _    _    _    _    _    _    _    _    _         _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _         _
+  _    _    _    _    _    _    @=   @4   @5   @6   @grv @-   _         _
+  _    _    _    _    _    _    =    @1   @2   @3   @0   grv            _
+  _      _    _    _    _    _    \    @7   @8   @9   @\                _
+  _    _    _    _              _              _    _    _         _    _    _
+                                                                   _    _    _
+)
+
+(deflayer eff
+  _    _    _    _                             _    _    _    _    _    _    _
+       _    _    _    _    _    _    _    _    _    _    _    _         _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _         _
+  _    f11  f6   f5   f4   _    _    _    _    _    _    _    _         _
+  _    f10  f3   f2   f1   _    _    _    _    _    _    _              _
+  _      f12  f9   f8   f7   _    _    _    _    _    _                 _
+  _    _    _    _              _              _    _    _         _    _    _
+                                                                   _    _    _
+)
+

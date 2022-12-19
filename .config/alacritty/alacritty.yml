@@ -457,7 +457,7 @@ live_config_reload: true
 # Offer IPC using `alacritty msg` (unix only)
 #ipc_socket: true
 
-#mouse:
+mouse:
   # Click settings
   #
   # The `double_click` and `triple_click` settings control the time
@@ -467,7 +467,7 @@ live_config_reload: true
   #triple_click: { threshold: 300 }
 
   # If this is `true`, the cursor is temporarily hidden when typing.
-  #hide_when_typing: false
+  hide_when_typing: true
 
 # Hints
 #
@@ -771,6 +771,19 @@ key_bindings:
   - { key: End,                      mode: AppCursor,   chars: "\x1bOF"        }
   #- { key: Home,      mods: Shift,   mode: ~Alt,        action: ScrollToTop    }
   #- { key: End,       mods: Shift,   mode: ~Alt,        action: ScrollToBottom }
+
+  # Fast/easy tmux window navigation
+  - { key: Key1,      mods: Control,                    chars: "\x02\x31" }
+  - { key: Key2,      mods: Control,                    chars: "\x02\x32" }
+  - { key: Key3,      mods: Control,                    chars: "\x02\x33" }
+  - { key: Key4,      mods: Control,                    chars: "\x02\x34" }
+  - { key: Key5,      mods: Control,                    chars: "\x02\x35" }
+  - { key: Key6,      mods: Control,                    chars: "\x02\x36" }
+  - { key: Key7,      mods: Control,                    chars: "\x02\x37" }
+  - { key: Key8,      mods: Control,                    chars: "\x02\x38" }
+  - { key: Key9,      mods: Control,                    chars: "\x02\x39" }
+  - { key: Key0,      mods: Control,                    chars: "\x02\x30" }
+  - { key: T,         mods: Control,                    chars: "\x02\x74" }
 
   # Vi Mode
   #- { key: Space,  mods: Shift|Control, mode: ~Search,    action: ToggleViMode            }
