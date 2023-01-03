@@ -30,6 +30,8 @@ inst \
   adwaita-qt5 \
   alacritty \
   bc \
+  bluez \
+  bluez-utils \
   discord \
   docker \
   firefox \
@@ -42,7 +44,7 @@ inst \
   neovim \
   noto-fonts-emoji \
   pamixer \
-  pipewire-pulse \
+  pulseaudio-bluetooth \
   pulsemixer \
   ripgrep \
   rofi \
@@ -57,10 +59,33 @@ inst \
   yarn \
   zsh
 
-insta firefox-pwa-bin \
-  ulauncher \
+inst pipewire-pulse
+
+insta \
+  firefox-pwa-bin \
   kmonad-bin \
-  nvm
+  nvm \
+  ulauncher \
+  zoom
+
+# for QMK:
+inst \
+  arm-none-eabi-binutils \
+  arm-none-eabi-gcc \
+  arm-none-eabi-newlib \
+  avr-binutils \
+  avr-gcc \
+  avr-libc \
+  base-devel \
+  dfu-programmer \
+  dfu-util \
+  dfu-util \
+  gcc \
+  git \
+  python-pip \
+  unzip \
+  wget \
+  zip
 
 pushd /usr/share/fonts/TTF
 sudo wget https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/SourceCodePro/Regular/complete/Sauce%20Code%20Pro%20Nerd%20Font%20Complete.ttf

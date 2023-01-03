@@ -21,22 +21,22 @@ local xnoremap = bind("x")
 local inoremap = bind("i")
 
 -- Vim Keys in insert mode
-inoremap("<C-h>", "<Left>")
-inoremap("<C-j>", "<Down>")
-inoremap("<C-k>", "<Up>")
-inoremap("<C-l>", "<Right>")
+--inoremap("<C-h>", "<Left>")
+--inoremap("<C-j>", "<Down>")
+--inoremap("<C-k>", "<Up>")
+--inoremap("<C-l>", "<Right>")
 
--- Fast project file and terminal switching:
-nnoremap(";m", ':lua require("harpoon.mark").add_file()<CR>')
-nnoremap(";;", ':lua require("harpoon.ui").toggle_quick_menu()<CR>')
-nnoremap(";h", ':lua require("harpoon.ui").nav_file(1)<CR>')
-nnoremap(";j", ':lua require("harpoon.ui").nav_file(2)<CR>')
-nnoremap(";k", ':lua require("harpoon.ui").nav_file(3)<CR>')
-nnoremap(";l", ':lua require("harpoon.ui").nav_file(4)<CR>')
-nnoremap(";y", ':lua require("harpoon.term").gotoTerminal(1)<CR>')
-nnoremap(";u", ':lua require("harpoon.term").gotoTerminal(2)<CR>')
-nnoremap(";i", ':lua require("harpoon.term").gotoTerminal(3)<CR>')
-nnoremap(";o", ':lua require("harpoon.term").gotoTerminal(4)<CR>')
+-- Up and down using thumbs:
+nnoremap("<CR>", "<Down>")
+nnoremap("<BS>", "<Up>")
+
+-- Fast project file switching:
+nnoremap("`m", ':lua require("harpoon.mark").add_file()<CR>')
+nnoremap("``", ':lua require("harpoon.ui").toggle_quick_menu()<CR>')
+nnoremap("<C-o>", ':lua require("harpoon.ui").nav_file(1)<CR>')
+nnoremap("<C-n>", ':lua require("harpoon.ui").nav_file(2)<CR>')
+nnoremap("<C-e>", ':lua require("harpoon.ui").nav_file(3)<CR>')
+nnoremap("<C-i>", ':lua require("harpoon.ui").nav_file(4)<CR>')
 
 -- Keep visual selection while indenting:
 vnoremap("<", "<gv")
@@ -64,15 +64,8 @@ vnoremap("K", ":m '<-2<CR>gv=gv")
 vnoremap("<S-Down>", ":m '>+1<CR>gv=gv")
 vnoremap("<S-Up>", ":m '<-2<CR>gv=gv")
 
--- Tab/S-Tab to repeat most recent f, F, t, or T forwards/backwards:
-nnoremap("<Tab>", ";")
-nnoremap("<S-Tab>", ",")
-vnoremap("<Tab>", ";")
-vnoremap("<S-Tab>", ",")
-
--- Binding <Tab> breaks the binding for <C-I>, which navigates forwards
--- in the jump list. So I'm moving that bind to <C-L>, right under the O.
-nnoremap("<C-L>", "<C-I>")
+-- MarkdownPreview easy-mode
+nnoremap("<leader>md", ":MarkdownPreviewToggle<CR>")
 
 -- Toggle inline diagnostics
 local inline_diagnostics_enabled = true
@@ -119,10 +112,10 @@ else
 	nnoremap("<C-Down>", "<C-W>j")
 	nnoremap("<C-Up>", "<C-W>k")
 	nnoremap("<C-Right>", "<C-W>l")
-	nnoremap("<C-H>", "<C-W>h")
-	nnoremap("<C-J>", "<C-W>j")
-	nnoremap("<C-K>", "<C-W>k")
-	nnoremap("<C-L>", "<C-W>l")
+	--nnoremap("<C-H>", "<C-W>h")
+	--nnoremap("<C-J>", "<C-W>j")
+	--nnoremap("<C-K>", "<C-W>k")
+	--nnoremap("<C-L>", "<C-W>l")
 end
 
 -- CD to current file/buffer directory
