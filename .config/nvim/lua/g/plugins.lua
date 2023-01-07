@@ -53,7 +53,7 @@ return require("packer").startup(function(use)
 
 	use({
 		"~/src/github.com/gerryhernandez/telescope-project.nvim",
-		-- "nvim-telescope/telescope-project.nvim",
+		--"nvim-telescope/telescope-project.nvim",
 	})
 
 	use({
@@ -139,10 +139,11 @@ return require("packer").startup(function(use)
 	-- Obsidian notes integration:
 	use({
 		"~/src/github.com/gerryhernandez/obsidian.nvim",
+		--"epwalsh/obsidian.nvim",
 		config = function()
 			require("obsidian").setup({
 				use_advanced_uri = true,
-				dir = "~/obsidian/main",
+				dir = "~/notes/Brain",
 				daily_notes = {
 					folder = "dailies",
 				},
@@ -150,17 +151,7 @@ return require("packer").startup(function(use)
 					nvim_cmp = true, -- if using nvim-cmp, otherwise set to false
 				},
 				note_id_func = function(title)
-					local sane_name = ""
-					if title ~= nil then
-						-- If title is given, transform it into valid file name.
-						sane_name = title:gsub(" ", "_"):gsub("[^A-Za-z0-9-]", ""):lower()
-					else
-						-- If title is nil, just add 4 random uppercase letters to the suffix.
-						for _ in 1, 4 do
-							sane_name = sane_name .. string.char(math.random(65, 90))
-						end
-					end
-					return sane_name
+					return title
 				end,
 			})
 		end,

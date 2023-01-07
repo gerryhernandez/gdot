@@ -31,12 +31,12 @@ nnoremap("<CR>", "<Down>")
 nnoremap("<BS>", "<Up>")
 
 -- Fast project file switching:
-nnoremap("`m", ':lua require("harpoon.mark").add_file()<CR>')
+nnoremap("`]", ':lua require("harpoon.mark").add_file()<CR>')
 nnoremap("``", ':lua require("harpoon.ui").toggle_quick_menu()<CR>')
-nnoremap("<C-o>", ':lua require("harpoon.ui").nav_file(1)<CR>')
-nnoremap("<C-n>", ':lua require("harpoon.ui").nav_file(2)<CR>')
-nnoremap("<C-e>", ':lua require("harpoon.ui").nav_file(3)<CR>')
-nnoremap("<C-i>", ':lua require("harpoon.ui").nav_file(4)<CR>')
+nnoremap("`0", ':lua require("harpoon.ui").nav_file(1)<CR>')
+nnoremap("`1", ':lua require("harpoon.ui").nav_file(2)<CR>')
+nnoremap("`2", ':lua require("harpoon.ui").nav_file(3)<CR>')
+nnoremap("`3", ':lua require("harpoon.ui").nav_file(4)<CR>')
 
 -- Keep visual selection while indenting:
 vnoremap("<", "<gv")
@@ -50,7 +50,7 @@ else
 end
 
 -- Paste without yank in visual mode:
-vnoremap("p", '"<leader>_dP')
+vnoremap("p", '"_dP')
 
 -- Copy visual selection to system clipboard:
 vnoremap("<leader>y", '"+y')
@@ -129,8 +129,6 @@ nnoremap("<leader>fo", "<cmd>ObsidianSearch<CR>")
 nnoremap("<leader>oo", "<cmd>ObsidianOpen<CR>")
 nnoremap("<leader>or", "<cmd>ObsidianBacklinks<CR>")
 nnoremap("<leader>ot", "<cmd>ObsidianToday<CR>")
-nnoremap("<leader>on", "<cmd>ObsidianNew ")
-vnoremap("<leader>on", "<cmd>ObsidianLink<CR>")
 vnoremap("<leader>ol", "<cmd>ObsidianLink<CR>")
 nnoremap("<leader>of", "<cmd>ObsidianFollowLink<CR>")
 vim.keymap.set("n", "gf", function()
@@ -140,6 +138,12 @@ vim.keymap.set("n", "gf", function()
 		return "gf"
 	end
 end, { noremap = false, expr = true })
+nnoremap("<leader>on", "<cmd>ObsidianNew ")
+nnoremap("<leader>on", function()
+  local name = vim.fn.input("Note Name: ", "", "file")
+	vim.cmd("ObsidianNew " .. name)
+end
+)
 
 -- Debugging:
 -- Convention: <leader>d = "leader Debug"

@@ -29,12 +29,13 @@ alias l.='ls -d .* --color=auto'
 alias grep='grep --color'
 
 # pushd via fzf of telescope-project.nvm
-# "PushD Project"
-function pdp() {
-  pushd $(cat ~/.local/share/nvim/telescope-projects.txt \
+# "Pushd Project"
+function pp() {
+  DIR=$(cat ~/.local/share/nvim/telescope-projects.txt \
     | awk -F"=" '{print $1 " " $2}' \
     | fzf -n 1 --with-nth 1 -q "$1" -1 \
     | awk '{print $2}')
+  pushd "$DIR"
 }
 
 alias gdot='git --git-dir=$HOME/.gdot/ --work-tree=$HOME'
