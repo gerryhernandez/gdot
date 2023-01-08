@@ -136,26 +136,26 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	-- Obsidian notes integration:
-	use({
-		"~/src/github.com/gerryhernandez/obsidian.nvim",
-		--"epwalsh/obsidian.nvim",
-		config = function()
-			require("obsidian").setup({
-				use_advanced_uri = true,
-				dir = "~/notes/Brain",
-				daily_notes = {
-					folder = "dailies",
-				},
-				completion = {
-					nvim_cmp = true, -- if using nvim-cmp, otherwise set to false
-				},
-				note_id_func = function(title)
-					return title
-				end,
-			})
-		end,
-	})
+  -- Obsidian notes integration:
+  use({
+    "~/src/github.com/gerryhernandez/obsidian.nvim",
+    --"epwalsh/obsidian.nvim",
+    config = function()
+      require("obsidian").setup({
+        use_advanced_uri = true,
+        dir = "~/notes/Brain",
+        daily_notes = {
+          folder = "dailies",
+        },
+        completion = {
+          nvim_cmp = true, -- if using nvim-cmp, otherwise set to false
+        },
+        note_id_func = function(title)
+          return title
+        end,
+      })
+    end,
+  })
 
 	--  use({
 	--    'euclio/vim-markdown-composer',
