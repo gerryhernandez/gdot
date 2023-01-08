@@ -1,23 +1,23 @@
 -- NvimTree (needs to be early in config):
 vim.g.loaded = 1
 vim.g.loaded_netrwPlugin = 1
-require("nvim-tree").setup({
-	sort_by = "case_sensitive",
-	view = {
-		adaptive_size = true,
-		mappings = {
-			list = {
-				{ key = "u", action = "dir_up" },
-			},
-		},
-	},
-	renderer = {
-		group_empty = true,
-	},
-	filters = {
-		dotfiles = true,
-	},
-})
+require("nvim-tree").setup {
+  sort_by = "case_sensitive",
+  view = {
+    adaptive_size = true,
+    mappings = {
+      list = {
+        { key = "u", action = "dir_up" },
+      },
+    },
+  },
+  renderer = {
+    group_empty = true,
+  },
+  filters = {
+    dotfiles = true,
+  },
+}
 
 -- Disable netrw to avoid conflict with nvim-tree:
 vim.g.loaded_netrw = 1
@@ -41,7 +41,7 @@ set.colorcolumn = "80" -- Column border
 set.sidescrolloff = 4
 
 set.undofile = true
-set.undodir = vim.fn.stdpath("config") .. "/undo"
+set.undodir = vim.fn.stdpath "config" .. "/undo"
 set.showmatch = true -- show the matching part of the pair for [] {} and ()
 set.cursorline = true -- highlight current line
 set.incsearch = true -- incremental search
@@ -59,6 +59,6 @@ set.inccommand = "split" -- live preview of :s results
 
 -- Initialize customized color schemes so when we switch to them, they're the
 -- way I like them:
-require("g/colors/dracula")
-require("g/colors/material")
-vim.cmd([[colorscheme tokyonight-night]])
+require "g/colors/dracula"
+require "g/colors/material"
+vim.cmd [[colorscheme tokyonight-night]]
